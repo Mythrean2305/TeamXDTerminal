@@ -142,8 +142,8 @@ const Home: React.FC<HomeProps> = ({ onNavigate, isLoggedIn }) => {
                 <p className="text-lg sm:text-xl font-mono font-bold" style={{ color: colors.primary }}>mythreanxd@gmail.com</p>
               </div>
               <div className="space-y-2">
-                <span className="text-[10px] font-bold uppercase opacity-40" style={{ color: colors.primary }}>Phone</span>
-                <p className="text-lg sm:text-xl font-mono font-bold" style={{ color: colors.primary }}>9371811511</p>
+                <span className="text-[10px] font-bold uppercase opacity-40" style={{ color: colors.primary }}>Gmail</span>
+                <p className="text-lg sm:text-xl font-mono font-bold" style={{ color: colors.primary }}>knitheesh0360@gmail.com</p>
               </div>
             </div>
             <button onClick={() => setShowContact(false)} className="w-full mt-8 py-4 border-2 font-black uppercase text-[11px] tracking-widest" style={{ borderColor: colors.primary, color: colors.primary }}>[ TERMINATE ]</button>
