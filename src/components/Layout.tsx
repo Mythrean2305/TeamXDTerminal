@@ -34,10 +34,10 @@ const Layout: React.FC<LayoutProps> = ({ children, viewName, onNavigate, current
     <div className="min-h-screen w-full flex items-center justify-center p-2 sm:p-4 md:p-8 font-mono overflow-x-hidden bg-black">
       {/* Window Wrapper */}
       <div 
-        className="w-full max-w-6xl h-[92vh] sm:h-[85vh] bg-black/40 border-[1px] rounded-lg overflow-hidden flex flex-col relative transition-all duration-500 backdrop-blur-sm"
+        className="w-full max-w-6xl h-[92vh] sm:h-[85vh] bg-black/60 border-[1px] rounded-lg overflow-hidden flex flex-col relative transition-all duration-500 md:backdrop-blur-sm"
         style={{ borderColor: colors.primary, boxShadow: `0 0 40px -10px ${colors.glow}` }}
       >
-        {/* The 3D Grid Floor - Rendered inside the window container */}
+        {/* The 3D Grid Floor */}
         <BackgroundGrid />
 
         {/* CRT Scanline */}
@@ -49,7 +49,8 @@ const Layout: React.FC<LayoutProps> = ({ children, viewName, onNavigate, current
           style={{ 
             borderColor: `${colors.primary}33`,
             backgroundColor: `${colors.secondary}ee`, 
-            backdropFilter: 'blur(12px)'
+            // Only apply blur on desktop
+            backdropFilter: window.innerWidth > 768 ? 'blur(12px)' : 'none'
           }}
         >
           <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-start">
@@ -139,9 +140,6 @@ const Layout: React.FC<LayoutProps> = ({ children, viewName, onNavigate, current
         .custom-scrollbar::-webkit-scrollbar-thumb {
           background: ${colors.primary};
           border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: ${colors.accent};
         }
       `}</style>
     </div>

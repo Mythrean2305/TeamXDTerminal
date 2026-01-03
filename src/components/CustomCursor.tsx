@@ -4,7 +4,7 @@ import { useTheme } from '../ThemeContext';
 export default function CustomCursor() {
   const { colors } = useTheme();
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
   
   // Position and velocity tracking
   const pos = useRef({ x: 0, y: 0 });
@@ -14,20 +14,26 @@ export default function CustomCursor() {
   const lastMouse = useRef({ x: 0, y: 0, time: Date.now() });
 
   useEffect(() => {
-    setMounted(true);
+    // Check if device is touch-enabled
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    // Only enable on desktop/mouse devices to save mobile performance
+    if (isTouchDevice) {
+      setShouldRender(false);
+      return;
+    }
+
+    setShouldRender(true);
     
     const handleMouseMove = (e: MouseEvent) => {
       const now = Date.now();
       
-      // Calculate delta movement
       const dx = e.clientX - lastMouse.current.x;
       const dy = e.clientY - lastMouse.current.y;
       
-      // Update target angle only if there is significant movement to prevent jitter
       if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
         let newAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
         
-        // Handle angle wrapping for smooth rotation (prevent 360 flips)
         let diff = newAngle - targetAngle.current;
         while (diff > 180) diff -= 360;
         while (diff < -180) diff += 360;
@@ -39,27 +45,24 @@ export default function CustomCursor() {
       lastMouse.current = { x: e.clientX, y: e.clientY, time: now };
     };
 
+    let animationId: number;
     const animate = () => {
-      // Very snappy interpolation (0.35) to minimize visual lag during clicks
       const ease = 0.35;
       pos.current.x += (target.current.x - pos.current.x) * ease;
       pos.current.y += (target.current.y - pos.current.y) * ease;
 
-      // Smooth angle interpolation
       const angleEase = 0.15;
       angle.current += (targetAngle.current - angle.current) * angleEase;
 
-      // Update cursor using translate3d
-      // We subtract 16 and 2 to ensure the SVG tip (16, 2) is exactly on the mouse point
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate3d(${pos.current.x - 16}px, ${pos.current.y - 2}px, 0) rotate(${angle.current}deg)`;
       }
 
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    const animationId = requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
@@ -67,7 +70,7 @@ export default function CustomCursor() {
     };
   }, []);
 
-  if (!mounted) return null;
+  if (!shouldRender) return null;
 
   return (
     <>
@@ -81,7 +84,6 @@ export default function CustomCursor() {
           padding: 0;
         }
 
-        /* Ensure interactive elements still show the custom cursor */
         a, button, input, textarea, [role="button"] {
           cursor: none !important;
         }
@@ -91,7 +93,7 @@ export default function CustomCursor() {
         ref={cursorRef}
         className="fixed top-0 left-0 pointer-events-none z-[9999] will-change-transform"
         style={{ 
-          transformOrigin: '16px 2px', // Rotate around the tip of the arrow
+          transformOrigin: '16px 2px',
           width: '32px',
           height: '32px'
         }}
