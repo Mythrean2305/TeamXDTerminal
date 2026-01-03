@@ -23,22 +23,21 @@ const DOCUMENTS = [
     id: 'doc-1',
     title: 'Software Requirements',
     filename: 'srs.pdf',
-    size: '1.4 MB',
-    url: 'https://drive.google.com/file/d/1WyWIMmfPwUKfgF7Jky6TwLcLYqxZcpEC/view?usp=share_link'
+    size: '123 KB',
+    url: 'https://drive.google.com/file/d/1rvHJumLaaO9K9NDKgTHJBIUSFbEZIF7Y/view?usp=sharing'
   },
   {
     id: 'doc-2',
-    title: 'Legal Agreement',
-    filename: 'non-disclosure-agreement.pdf',
-    size: '2.1 MB',
-    url: 'https://drive.google.com/file/d/1rann62ezO-WjIETlAF2GT9Aqkq9ot6s5/view?usp=share_link'
+    title: 'Feelance_agreement',
+    filename: 'freelance_agreement.pdf',
+    size: '69 KB',
+    url: 'https://drive.google.com/file/d/1Q2oKdmVmK45R2UFsy87B9DSU1L6dKhkS/view?usp=sharing'
   }
 ];
 
 const SYSTEM_LOGS = [
-  { time: '14:02:11', status: 'OK', msg: 'Core systems initialized' },
-  { time: '14:05:22', status: 'OK', msg: 'Establishing secure document pointer' },
-  { time: '14:10:05', status: 'OK', msg: 'Dashboard modules loaded' }
+  { time: '12-31-25', status: 'OK', msg: 'Design work started' },
+  { time: '12-28-25', status: 'OK', msg: 'Orientation Meeting' }
 ];
 
 // --- END CONFIGURATION DATA ---
