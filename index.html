@@ -66,7 +66,7 @@
         z-index: 0;
         background: #000;
         overflow: hidden;
-        perspective: 300px; /* Stronger perspective for the slanting look */
+        perspective: 300px;
       }
 
       .grid-background::before {
@@ -80,16 +80,13 @@
           linear-gradient(to right, var(--primary-fade) 1px, transparent 1px),
           linear-gradient(to bottom, var(--primary-fade) 1px, transparent 1px);
         background-size: 60px 60px;
-        /* Rotate the floor into perspective */
         transform: rotateX(75deg);
         transform-origin: center bottom;
         animation: grid-travel 2.5s linear infinite;
-        /* Fade into the horizon and edges */
         mask-image: linear-gradient(to top, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 80%);
         -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 80%);
       }
 
-      /* Glow overlay for the horizon */
       .grid-background::after {
         content: "";
         position: absolute;
@@ -111,7 +108,6 @@
         animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
       }
 
-      /* Scrollbar */
       .custom-scrollbar::-webkit-scrollbar {
         width: 8px;
       }
@@ -126,19 +122,18 @@
   <script type="importmap">
 {
   "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
     "react": "https://esm.sh/react@^19.2.3",
     "react/": "https://esm.sh/react@^19.2.3/",
     "vite": "https://esm.sh/vite@^7.3.0",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
   <body>
     <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+    <script type="module" src="src/index.tsx"></script>
+  </body>
 </html>
