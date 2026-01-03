@@ -15,7 +15,7 @@ const AppContent: React.FC = () => {
   
   const [credentials, setCredentials] = useState<{user: string, pass: string} | null>({
     user: 'verzz',
-    pass: 'password'
+    pass: 'pranay123'
   });
   
   const { colors } = useTheme();

@@ -117,8 +117,8 @@ const Home: React.FC<HomeProps> = ({ onNavigate, isLoggedIn }) => {
         </div>
 
         <div className="sm:absolute sm:left-1/2 sm:-translate-x-1/2 flex items-center gap-2 order-1 sm:order-2">
-          <span className="opacity-40 text-[7px] sm:text-[9px]">Made with love for profession by</span>
-          <span className="animate-pulse" style={{ color: colors.accent }}>NiMy</span>
+          <span className="opacity-40 text-[7px] sm:text-[9px]">Made with ❤️ by</span>
+          <span className="animate-pulse" style={{ color: colors.accent }}>Nitheesh and Mythrean</span>
         </div>
 
         <div className="flex items-center gap-4 opacity-60 order-3">
