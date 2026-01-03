@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TerminalOS v1.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --primary: #00ff66;
+        --primary-fade: rgba(0, 255, 102, 0.2);
+        --glow: rgba(0, 255, 102, 0.4);
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+        font-family: 'Fira Code', 'Roboto Mono', monospace;
+        color: #fff;
+        overflow: hidden;
+      }
+      
+      @keyframes scanline {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100%); }
+      }
+
+      .scanline {
+        width: 100%;
+        height: 100px;
+        z-index: 50;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
+        opacity: 0.1;
+        position: absolute;
+        bottom: 100%;
+        animation: scanline 8s linear infinite;
+        pointer-events: none;
+      }
+
+      @keyframes cursor-blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+
+      .cursor-blink::after {
+        content: '_';
+        margin-left: 2px;
+        animation: cursor-blink 0.8s step-end infinite;
+        color: var(--primary);
+        text-shadow: 0 0 10px var(--glow);
+      }
+
+      /* HIGH-FIDELITY 3D SLANTING GRID */
+      @keyframes grid-travel {
+        from { background-position: 0 0; }
+        to { background-position: 0 60px; }
+      }
+
+      .grid-background {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: #000;
+        overflow: hidden;
+        perspective: 300px; /* Stronger perspective for the slanting look */
+      }
+
+      .grid-background::before {
+        content: "";
+        position: absolute;
+        width: 300%;
+        height: 200%;
+        bottom: -50%;
+        left: -100%;
+        background-image: 
+          linear-gradient(to right, var(--primary-fade) 1px, transparent 1px),
+          linear-gradient(to bottom, var(--primary-fade) 1px, transparent 1px);
+        background-size: 60px 60px;
+        /* Rotate the floor into perspective */
+        transform: rotateX(75deg);
+        transform-origin: center bottom;
+        animation: grid-travel 2.5s linear infinite;
+        /* Fade into the horizon and edges */
+        mask-image: linear-gradient(to top, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 80%);
+        -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 80%);
+      }
+
+      /* Glow overlay for the horizon */
+      .grid-background::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 50%, transparent 20%, #000 90%);
+        pointer-events: none;
+      }
+
+      @keyframes glitch {
+        0% { transform: translate(0); }
+        20% { transform: translate(-2px, 2px); }
+        40% { transform: translate(-2px, -2px); }
+        60% { transform: translate(2px, 2px); }
+        80% { transform: translate(2px, -2px); }
+        100% { transform: translate(0); }
+      }
+
+      .glitch-hover:hover {
+        animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
+      }
+
+      /* Scrollbar */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.5);
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 4px;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
