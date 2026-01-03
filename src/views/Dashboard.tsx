@@ -39,15 +39,15 @@ const Dashboard: React.FC<DashboardProps> = ({ username }) => {
       id: 'doc-1',
       title: 'Software Requirements',
       filename: 'srs.pdf',
-      size: '1.4 MB',
-      url: 'https://drive.google.com/file/d/1WyWIMmfPwUKfgF7Jky6TwLcLYqxZcpEC/view?usp=share_link'
+      size: '136 KB',
+      url: 'https://drive.google.com/file/d/1rvHJumLaaO9K9NDKgTHJBIUSFbEZIF7Y/view?usp=sharing'
     },
     {
       id: 'doc-2',
-      title: '',
-      filename: 'non-disclosure-agreement.pdf',
-      size: '2.1 MB',
-      url: 'https://drive.google.com/file/d/1rann62ezO-WjIETlAF2GT9Aqkq9ot6s5/view?usp=share_link'
+      title: 'Freelance_agreement',
+      filename: 'freelance_agreement.pdf',
+      size: '69 KB',
+      url: 'https://drive.google.com/file/d/1Q2oKdmVmK45R2UFsy87B9DSU1L6dKhkS/view?usp=sharing'
     }
   ];
 
